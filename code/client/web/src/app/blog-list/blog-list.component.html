@@ -3,5 +3,5 @@
 </p>
 
 <ul class="blogs">
-  <li *ngFor="let blog of blogs">{{blog.title}}</li>
+  <li *ngFor="let blog of blogs"><a [routerLink]="['./', blog.id]">{{blog.title}}</a></li>
 </ul>
