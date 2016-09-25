@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Blog } from '../shared'
-import { BLOGS } from './dummy-blogs'
+import { BLOGS } from '../shared/dummy-blogs'
 
 @Component({
   selector: 'app-blog-list',

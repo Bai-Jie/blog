@@ -1,3 +1,4 @@
 export class Blog {
-    title:string;
+    title: string;
+    content: string;
 }
