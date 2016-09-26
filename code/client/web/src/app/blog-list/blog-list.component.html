@@ -1,7 +1,3 @@
-<p>
-  blog-list
-</p>
-
-<ul class="blogs">
-  <li *ngFor="let blog of blogs"><a [routerLink]="['./', blog.id]">{{blog.title}}</a></li>
+<ul class="blogs list-unstyled">
+  <li *ngFor="let blog of blogs"><a [routerLink]="['./', blog.id]"><h2>{{blog.title}}</h2></a></li>
 </ul>
