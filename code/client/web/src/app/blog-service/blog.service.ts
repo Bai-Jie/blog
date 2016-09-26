@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { Blog } from '.'
-import { BLOGS } from './dummy-blogs'
 
 @Injectable()
 export class BlogService {
 
-  constructor() { }
+  private blogsUrl = 'api/blogs';  // URL to web api
+
+  constructor(private http: Http) { }
 
   public getBlogList(): Observable<Blog[]> {
-    return Observable.of(BLOGS);
+    return this.http.get(this.blogsUrl).map(response => response.json().data);
   }
 
   public getBlog(id: string): Observable<Blog> {
-    return Observable.from(BLOGS).filter(blog => blog.id === id);
+    return this.http.get(`${this.blogsUrl}/${id}`).map(response => response.json().data);
   }
 
 }
