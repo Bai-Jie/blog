@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable'
 
-import { Blog } from '../shared'
-import { BLOGS } from '../shared/dummy-blogs'
+import { Blog } from '../blog-service'
+import { BlogService } from '../blog-service'
 
 @Component({
   selector: 'app-blog-list',
@@ -10,11 +11,12 @@ import { BLOGS } from '../shared/dummy-blogs'
 })
 export class BlogListComponent implements OnInit {
 
-  private blogs: Blog[] = BLOGS;
+  private blogs: Observable<Blog[]>;
 
-  constructor() { }
+  constructor(private blogService: BlogService) { }
 
   ngOnInit() {
+    this.blogs = this.blogService.getBlogList();
   }
 
 }

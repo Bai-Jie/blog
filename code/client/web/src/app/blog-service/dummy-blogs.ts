@@ -1,4 +1,4 @@
-import { Blog } from '../shared'
+import { Blog } from './blog'
 
 export const BLOGS: Blog[] = [];
 
