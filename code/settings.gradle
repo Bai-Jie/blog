@@ -1,3 +1,4 @@
 rootProject.name = 'blog'
 
 include 'business'
+include 'server'

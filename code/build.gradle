@@ -3,6 +3,7 @@
 def javaProjects = []
 
 javaProjects << 'business'
+javaProjects << 'server'
 
 project(javaProjects) {
     apply plugin: 'java'
