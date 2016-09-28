@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data-service';
 
-import { routing } from './app.routing'
+import { BlogRoutingModule } from './app-routing.module'
 import { BlogService } from './blog-service'
 import { AppComponent } from './app.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
@@ -24,7 +24,7 @@ import { BlogComponent } from './blog/blog.component';
     FormsModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
-    routing
+    BlogRoutingModule
   ],
   providers: [
     BlogService
