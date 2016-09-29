@@ -8,7 +8,8 @@ import { Blog } from '.'
 @Injectable()
 export class BlogService {
 
-  private blogsUrl = 'api/blogs';  // URL to web api
+  //private blogsUrl = 'api/blogs';  // URL to web api
+  private blogsUrl = 'http://localhost/api/blogs';  // URL to web api
 
   constructor(private http: Http) { }
 
