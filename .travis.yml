@@ -25,6 +25,10 @@ deploy:
   #passphrase: "Optional. In case a passphrase is configured on Bintray and GPG signing is used"
   #dry-run: "Optional. If true, skips sending requests to Bintray. Useful for testing your configuration"
 
+after_deploy:
+  # Trigger Automated Builds on Docker Hub
+  - curl --data build=true -X POST https://registry.hub.docker.com/u/baijie/blog/trigger/c7904dde-8a0e-45fe-b34f-b92ea30a6cd5/
+
 # Caching
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
