@@ -3,13 +3,13 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { environment } from '../../environments/environment';
 import { Blog } from '.'
 
 @Injectable()
 export class BlogService {
 
-  //private blogsUrl = 'api/blogs';  // URL to web api
-  private blogsUrl = 'http://localhost/api/blogs';  // URL to web api
+  private blogsUrl = environment.restApiBaseUrl + 'blogs';  // URL to web api
 
   constructor(private http: Http) { }
 
