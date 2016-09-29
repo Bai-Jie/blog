@@ -13,6 +13,17 @@ before_install: cd code
 script:
     - ./gradlew build
 
+deploy:
+  provider: bintray
+  # because of "before_install: cd code"
+  file: "../.travis.deploy.json"
+  user: "baijie"
+  #key: "Bintray API key"
+  key:
+    secure: evEV3oDsnBtFYS+n/UgAfCwqsETPzNicB/Qn6ZSoXQZevkAbvtpFtgYt0uyMFzPDwUI9l84uj+aS2HHKi2ipf0Zvhs2jq1Hi/sxNdZ7GYQLD8lvfgIqw1hCzIiVF85rtKxO4UY82EtfesShK6dwNiHLCgnsw16WOuTWD0XrpyAGchWpTEbmUBcSBDosuvouU6FwlOWnE7FR1jbkjrMDHkUxfmsgjoNuLSUevfpuZ5PuztcSLa5j6y9uttlxMcuqhpLOwDBELjNAUbtYLsyHmwQTgPj9q/aPOHAruL8gX96fuNOIpDvdMEI1BGE3ggM8QaSWV92uqpVtq4IrbHiEy8eEr9qGLVLhGl2KJRWTAEUu4vg63C/O38FGlKzDBUnPDQKMYPoYqxJfeUf/OUdG4wCSuwQUdxGJvOFNM15vAq/RSliSF/h361gs4MoRDTexrn4qrlHp0F65MfMObRJzpRZXwK7nWF2aAcoGwIHpkwXYtNQQO/8iWXzQaYtdMk92aTJxrBmZgHXI9X4AP8x27mnch3ep6lKuv43OSb8Epcy4+83xAVeruyzhc3wpjHEmZ+nwo5MnaNx2WDiLIgUVRESNKsKmIgCl206qj2DVeLXwfnvk9Vi7F+ADezMbCCH+GKE7Clv1UMUH04AfHT0FwexvTjFWGYb4+kFXiGMSubIs=
+  #passphrase: "Optional. In case a passphrase is configured on Bintray and GPG signing is used"
+  #dry-run: "Optional. If true, skips sending requests to Bintray. Useful for testing your configuration"
+
 # Caching
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
