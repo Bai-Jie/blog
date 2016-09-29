@@ -12,6 +12,7 @@ before_install: cd code
 
 script:
     - ./gradlew build
+    - ./gradlew distTar
 
 deploy:
   provider: bintray

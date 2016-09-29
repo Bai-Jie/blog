@@ -25,7 +25,7 @@
   "files": [
     {
       "includePattern": "server/build/(.*)",
-      "excludePattern": "server/build/(generated|intermediates|tmp)/.*",
+      "excludePattern": "server/build/(generated|intermediates|tmp|classes)/.*",
       "uploadPattern": "gq/baijie/blog/server/nightly/build/$1",
       "matrixParams": {
         "override": 1
