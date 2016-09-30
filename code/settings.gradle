@@ -2,3 +2,4 @@ rootProject.name = 'blog'
 
 include 'business'
 include 'server'
+include 'client:web'

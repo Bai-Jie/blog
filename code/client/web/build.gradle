@@ -1,0 +1,32 @@
+plugins {
+  id "distribution"
+  id "com.moowork.node" version "0.13"
+}
+
+final String ARTIFACT_DIR_NAME = 'artifact'
+final String ARTIFACT_PATH = "${buildDir}/${ARTIFACT_DIR_NAME}"
+
+node {
+  version = '6.7.0'
+  npmVersion = '3.10.8'
+  download = true
+}
+
+distributions {
+    main {
+        baseName = 'client'
+        contents {
+            from ARTIFACT_PATH
+        }
+    }
+}
+
+npm_install.dependsOn npmSetup
+
+task buildProd(type: NpmTask, dependsOn: npm_install) {
+  args = ['run', 'ng', '--', 'build', '--prod', '--output-path', ARTIFACT_PATH]
+}
+
+configure([distZip, distTar]) {
+  dependsOn buildProd
+}

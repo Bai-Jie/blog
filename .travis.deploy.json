@@ -30,6 +30,14 @@
       "matrixParams": {
         "override": 1
       }
+    },
+    {
+      "includePattern": "client/web/build/(.*)",
+      "excludePattern": "client/web/build/artifact/.*",
+      "uploadPattern": "gq/baijie/blog/client/nightly/build/$1",
+      "matrixParams": {
+        "override": 1
+      }
     }
   ],
 
