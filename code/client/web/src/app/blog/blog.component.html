@@ -1,4 +1,7 @@
 <div *ngIf="blog">
+  <!--Title-->
   <h2>{{blog.title}}</h2>
-  <p>{{blog.content}}</p>
+  <!--Content-->
+  <div *ngIf="blogStringContent"><p>{{blogStringContent}}</p></div>
+  <div *ngIf="blogHtmlContent" [innerHTML]=blogHtmlContent></div>
 </div>
