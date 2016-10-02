@@ -1,8 +1,10 @@
 package gq.baijie.blog.server;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
+import gq.baijie.blog.business.Blog;
+import gq.baijie.blog.business.BlogContent;
+import gq.baijie.blog.business.MockBlogService;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonArray;
@@ -13,29 +15,7 @@ import io.vertx.ext.web.handler.CorsHandler;
 
 public class BlogService implements Service {
 
-  private static final String SAMPLE_PARAGRAPH =
-      "Angular is built by a team of engineers who share a passion for making web development feel "
-      + "effortless. We believe that writing beautiful apps should be joyful and fun. We're "
-      + "building a platform for the future.";
-
-  private Map<String, JsonObject> blogs = new HashMap<>();
-
-  { // init
-    setUpInitialData();
-  }
-
-  private void setUpInitialData() {
-    for (int i = 0; i <= 10; i++) {
-      addBlog(new JsonObject()
-                  .put("id", String.valueOf(i))
-                  .put("title", "blog " + i)
-                  .put("content", String.format("sample paragraph %d.\n%s", i, SAMPLE_PARAGRAPH)));
-    }
-  }
-
-  private void addBlog(JsonObject blog) {
-    blogs.put(blog.getString("id"), blog);
-  }
+  private final gq.baijie.blog.business.BlogService service = new MockBlogService();
 
   @Override
   public Router newRouter() {
@@ -48,8 +28,7 @@ public class BlogService implements Service {
   }
 
   private void handleListBlogs(RoutingContext routingContext) {
-    JsonArray arr = new JsonArray();
-    blogs.forEach((k, v) -> arr.add(v));
+    JsonArray arr = getBlogs();
     routingContext.response()
         .putHeader("content-type", "application/json")
         .end(new JsonObject().put("data", arr).encode());
@@ -61,7 +40,7 @@ public class BlogService implements Service {
     if (blogId == null) {
       sendError(400, response);
     } else {
-      JsonObject product = blogs.get(blogId);
+      JsonObject product = getBlog(blogId);
       if (product == null) {
         sendError(404, response);
       } else {
@@ -74,6 +53,45 @@ public class BlogService implements Service {
 
   private void sendError(int statusCode, HttpServerResponse response) {
     response.setStatusCode(statusCode).end();
+  }
+
+  private JsonArray getBlogs() {
+    try {
+      return translateBlogList(service.getBlogs());
+    } catch (Exception e) {
+      new RuntimeException(e).printStackTrace();
+      return null;
+    }
+  }
+
+  private JsonObject getBlog(String id) {
+    try {
+      return translateBlog(service.getBlog(id));
+    } catch (Exception e) {
+      new RuntimeException(e).printStackTrace();
+      return null;
+    }
+  }
+
+  private JsonArray translateBlogList(List<Blog> blogs) {
+    final JsonArray result = new JsonArray();
+    blogs.forEach(blog -> result.add(translateBlog(blog)));
+    return result;
+  }
+
+  private JsonObject translateBlog(Blog blog) {
+    final JsonObject result = new JsonObject();
+    result.put("id", blog.getId());
+    result.put("title", blog.getTitle());
+    result.put("content", translateBlogContent(blog.getContent()));
+    return result;
+  }
+
+  private JsonObject translateBlogContent(BlogContent content) {
+    final JsonObject result = new JsonObject();
+    result.put("type", content.getType());
+    result.put("data", content.getData());
+    return result;
   }
 
 }

@@ -7,4 +7,5 @@ mainClassName = "${group}.server.Main"
 
 dependencies {
   compile 'io.vertx:vertx-web:3.3.3'
+  compile 'commons-io:commons-io:2.5'
 }
