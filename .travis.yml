@@ -10,9 +10,11 @@ jdk: oraclejdk8
 
 before_install: cd code
 
+# https://docs.travis-ci.com/user/customizing-the-build#Skipping-the-Installation-Step
+install: true
+
 script:
-    - ./gradlew build
-    - ./gradlew distTar
+  - ./gradlew build
 
 deploy:
   provider: bintray
