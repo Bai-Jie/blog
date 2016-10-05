@@ -1,6 +1,10 @@
 <div *ngIf="blog">
   <!--Title-->
-  <h2>{{blog.title}}</h2>
+  <nav class="breadcrumb">
+    <a class="breadcrumb-item" routerLink="/blog">Blog</a>
+    <span class="breadcrumb-item active">{{blog.title}}</span>
+  </nav>
+  <h2 id="blog-title">{{blog.title}}</h2>
   <!--Content-->
   <div *ngIf="blogStringContent"><p>{{blogStringContent}}</p></div>
   <div *ngIf="blogHtmlContent" [innerHTML]=blogHtmlContent></div>
