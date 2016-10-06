@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { BlogRoutingModule } from './app-routing.module'
+import { AccountService } from './account-service'
 import { BlogService } from './blog-service'
 import { AppComponent } from './app.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
@@ -22,6 +23,7 @@ import { BlogComponent } from './blog/blog.component';
     BlogRoutingModule
   ],
   providers: [
+    AccountService,
     BlogService
   ],
   bootstrap: [AppComponent]
