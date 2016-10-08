@@ -1,23 +1,15 @@
 package gq.baijie.blog.server;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
-import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.handler.CorsHandler;
 
 public class AccountService implements Service {
 
   @Override
   public Router newRouter() {
     final Router router = Router.router(Main.getInstance().vertx);
-    // Cross-origin resource sharing (CORS)
-    router.route().handler(CorsHandler.create(".*").allowedMethods(
-        Arrays.stream(HttpMethod.values()).collect(Collectors.toSet())));
     router.post("/account/tokens").handler(this::handleCreateToken);
     router.delete("/account/accounts/:accountId/tokens/:token").handler(this::handleDeleteToken);
     return router;

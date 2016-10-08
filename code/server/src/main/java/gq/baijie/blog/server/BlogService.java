@@ -5,13 +5,11 @@ import java.util.List;
 import gq.baijie.blog.business.Blog;
 import gq.baijie.blog.business.BlogContent;
 import gq.baijie.blog.business.MockBlogService;
-import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.handler.CorsHandler;
 
 public class BlogService implements Service {
 
@@ -20,8 +18,6 @@ public class BlogService implements Service {
   @Override
   public Router newRouter() {
     final Router router = Router.router(Main.getInstance().vertx);
-    // Cross-origin resource sharing (CORS)
-    router.route().handler(CorsHandler.create(".*").allowedMethod(HttpMethod.GET));
     router.get("/blogs/:blogId").handler(this::handleGetBlog);
     router.get("/blogs").handler(this::handleListBlogs);
     return router;
