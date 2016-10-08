@@ -25,6 +25,7 @@ public class Main implements Runnable {
     Router router = Router.router(vertx);
 
     router.mountSubRouter("/api", new BlogService().newRouter());
+    router.mountSubRouter("/api", new AccountService().newRouter());
 
     server.requestHandler(router::accept).listen(80);
   }

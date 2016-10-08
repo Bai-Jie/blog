@@ -44,11 +44,14 @@
             <input id="passwordInput" #passwordInput class="form-control" type="password" placeholder="Password">
           </div>
         </form>
+        <div *ngIf="isLoginFailed" id="loginFailedAlert" class="alert alert-info" role="alert">
+          Login failed.
+        </div>
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onClickLogin(userIdInput.value, passwordInput.value)">Login</button>
+        <button type="button" class="btn btn-primary" (click)="onClickLogin(userIdInput.value, passwordInput.value)">Login</button>
       </div>
 
     </div><!-- /.modal-content -->
